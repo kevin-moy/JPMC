@@ -11,7 +11,7 @@ import Foundation
 class RocketObject {
     var name: String?
     var type: String?
-    var avatarURL: String?
+    var payload: String?
     
     convenience init(json: [String: Any]) {
         self.init()
@@ -24,6 +24,13 @@ class RocketObject {
             type = rocketType as? String
         }
         
+        if let secondStage = json["second_stage"] as? [String: String]{
+            if let payloads = secondStage["payloads"] as? [String: Any] {
+                if let payloadID = payloads["payload_id"] {
+                    payload = payloadID as? String
+                }
+            }
+        }
     }
     
 }

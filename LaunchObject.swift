@@ -9,16 +9,17 @@
 import Foundation
 
 class LaunchObject {
-    var flightNumber: String?
+    var flightNumber: Int?
     var year: String?
     var site: String?
+    var date: String?
     var rocket: RocketObject!
     
     convenience init(json: [String: Any]) {
         self.init()
         
         if let launchFlightNumber = json["flight_number"] {
-            flightNumber = launchFlightNumber as? String
+            flightNumber = launchFlightNumber as? Int
         }
         
         if let launchYear = json["launch_year"] {
@@ -28,6 +29,11 @@ class LaunchObject {
         if let launchSite = json["launch_site"] as? [String: String] {
             site = launchSite["site_name"]
         }
+        
+        if let launchDate = json["launch_date_utc"] {
+            date = launchDate as? String
+        }
+        date = date?.convertDateToShort(dateString: date!)
         
         if let launchRocket = json["rocket"] as? [String: Any] {
             rocket = RocketObject.init(json: launchRocket)
