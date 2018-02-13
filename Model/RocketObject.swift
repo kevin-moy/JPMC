@@ -24,13 +24,5 @@ class RocketObject {
             type = rocketType as? String
         }
         
-        if let secondStage = json["second_stage"] as? [String: String]{
-            if let payloads = secondStage["payloads"] as? [String: Any] {
-                if let payloadID = payloads["payload_id"] {
-                    payload = payloadID as? String
-                }
-            }
-        }
     }
-    
 }
