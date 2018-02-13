@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Turn date string into more readible date string
 extension String {
     func convertDateToShort(dateString: String) -> String {
         let dateFormatter = DateFormatter()

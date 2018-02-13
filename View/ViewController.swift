@@ -20,7 +20,7 @@ class ViewController: UIViewController,  UITableViewDelegate, UITableViewDataSou
     var endDateFilter: String?
     var launchYearFilter: String?
     
-    // Using MVVM model
+    // I am using MVVM model since it is more flexible then MVC if need to add to app.
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,11 +28,12 @@ class ViewController: UIViewController,  UITableViewDelegate, UITableViewDataSou
     }
     
     func getLaunches() {
-        // Get Filter
+        // start API Call
         launchFeed.feedRequest(launchYearFilter, startDateFilter: startDateFilter, endDateFilter: endDateFilter) { (success, error) in
             if success {
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
+                    // Show alert if no results are found
                     if self.launchFeed.launch.count == 0 {
                         self.noResultsAlert()
                     }
@@ -43,6 +44,7 @@ class ViewController: UIViewController,  UITableViewDelegate, UITableViewDataSou
             }
         }
     }
+    
     func noResultsAlert() {
         let alertController = UIAlertController.init(title: "No Results", message: "", preferredStyle: .alert)
         let okayAction = UIAlertAction.init(title: "OK", style: .cancel, handler: nil)
@@ -81,6 +83,7 @@ class ViewController: UIViewController,  UITableViewDelegate, UITableViewDataSou
     }
     
     @IBAction func applyButtonPressed(_ sender: UIBarButtonItem) {
+        // Need to clear feed when filters are applied
         launchFeed.clearFeed()
         getLaunches()
         filterView.alpha = 0

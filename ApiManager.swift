@@ -15,8 +15,9 @@ class ApiManager {
     func getUpcomingLaunches(_ launchFilter: String?, startDateFilter: String?, endDateFilter: String?, completionHandler:@escaping (_ launches: [LaunchObject]?, _ error: String?) -> Void) {
         
         var launchArray = [LaunchObject]()
+        // Construct URL
         var urlString = Constants.spacexURL
-        // https://api.spacexdata.com/v2/launches/upcoming?launch_year=2018&start=2018-02-18&final=2018-03-19&
+        
         if launchFilter != nil {
             urlString.append(Constants.launchYearURL + launchFilter!)
         }
@@ -53,7 +54,7 @@ class ApiManager {
                 guard let spacexJSON = json as? [[String: Any]] else {
                     completionHandler(nil, "JSON not a dictionary")
                     return }
-                
+                // Get JSON data and put it in Launch Object
                 for feedData in spacexJSON {
                     let feed = LaunchObject.init(json: feedData)
                     launchArray.append(feed)
