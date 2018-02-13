@@ -9,7 +9,7 @@
 import Foundation
 
 class LaunchObject {
-    var flightNumber: Int?
+    var flightNumber: Int = 0
     var year: String?
     var site: String?
     var date: String?
@@ -19,7 +19,7 @@ class LaunchObject {
         self.init()
         
         if let launchFlightNumber = json["flight_number"] {
-            flightNumber = launchFlightNumber as? Int
+            flightNumber = launchFlightNumber as? Int ?? 0
         }
         
         if let launchYear = json["launch_year"] {

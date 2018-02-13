@@ -12,6 +12,7 @@ import Foundation
 struct Constants {
     static let spacexURL = "https://api.spacexdata.com/v2/launches/upcoming?"
     
-    static let yearURL = "launch_year="
-    static let dateURL = "launch_date_utc="
+    static let launchYearURL = "&launch_year="
+    static let startDateURL = "&start="
+    static let endDateURL = "&final="
 }
